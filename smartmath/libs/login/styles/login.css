@@ -1,0 +1,120 @@
+body {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 17px;
+    background-color: rgb(28, 148, 223);
+    color: #292929;
+    overflow: hidden;
+  }
+   
+  .login_form {
+    position: relative;
+    margin: 6em auto 0 auto;
+    height: 350px;
+    width: 550px;
+    text-align: center;
+    background-color: rgba(254, 254, 254, 0.7);
+    border-radius: 1em;  
+  }
+   
+  input[type=email], 
+  input[type=password] {
+    margin-top: 20px;
+    width: 350px;
+    height: 25px;
+    border: 2px solid #292929;
+    border-radius: 1px;
+  }
+   
+  input[type=email]:focus,
+  input[type=password]:focus {
+    outline: none;
+    border: 2px solid rgb(28, 148, 223);
+  }
+
+  #id_password{
+    margin-top: 20px;
+    margin-right: 7px;
+    width: 350px;
+    height: 25px;
+    border: 2px solid #292929;
+    border-radius: 1px;
+}
+
+#id_password:focus{
+    outline: none;
+    border: 2px solid rgb(28, 148, 223);
+}
+  input[type=submit] {
+    margin-top: 50px;
+    width: 200px;
+    height: 40px;
+    background-color: rgb(28, 148, 223);
+    color: white;
+    border: none;  
+    transition: background-color 1s;
+  }
+   
+  input[type=submit]:focus,
+  input[type=submit]:hover {
+    background-color: #292929;
+    outline: none;
+    cursor: pointer;
+  }
+   
+  input::placeholder {
+    padding-left: 0.25em;
+    font: 0.95em/1em 'Oxygen', sans-serif;
+    color: rgba(76, 98, 111, 0.9);
+    letter-spacing: 0;
+    opacity: 1;
+    transition: all 800ms ease-out;
+  }
+  input:focus::placeholder {
+    letter-spacing: 1em;
+    opacity: 0;
+    padding-left: 1em;
+    -webkit-filter: blur(4px);
+  }
+   
+  .login_form::before, 
+  .login_form::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 800px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 40%;
+    z-index: -1;
+  }
+  
+  @keyframes wawes {
+    from { transform: rotate(0); }
+    to { transform: rotate(360deg); }
+  }
+  
+a{
+    color: rgb(28, 148, 223);
+}
+
+a:focus, a:hover{
+    color: #292929;
+    text-decoration: none;
+    transition: color 1s;
+}
+
+select{
+  outline: none;
+  border: none;
+  height: 40px;
+  width: 500px;
+}
+
+.informations{
+  height: 25px;
+  background-color: rgba(254, 254, 254, 0.7);
+  margin-top: 266px;
+  width: 100%;
+}
+

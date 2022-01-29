@@ -1,28 +1,27 @@
 <?php
+    require_once "libs/login/scripts/0.php";
     session_start();
-    if(!isset($_SESSION['logged']))
-    {
-        header('Location: https://dziennik.smartmath.pl/sp1wegrow/');
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: https://$domain_dziennik/");
         exit();
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="pl-pl">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="smartmath dzinenik - strona logowania">
-        <meta name="keywords" content="smartmath, dzinenik, szkoła, school">
+        <meta name="description" content="smartmath dziennik - strona logowania">
+        <meta name="keywords" content="smartmath, dziennik, szkoła, school">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preconnect" href="https://cdn.smartmath.pl">
+        <link rel="preconnect" href="https://<?= $domain_cdn ?>">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap">
-        <link rel="stylesheet" href="https://cdn.smartmath.pl/libs/home/styles/home.css">
+        <link rel="stylesheet" href="https://<?= $domain_cdn ?>/libs/home/styles/home.css">
         <link rel="stylesheet" href="home.css">
         <title>Home | smartmath</title>
-        <base href="https://dziennik.smartmath.pl">
+        <base href="https://<?= $domain_dziennik ?>">
     </head>
     <body>
         <div class="container">
@@ -35,7 +34,7 @@
                 <a href="/plan-lekcji/" class="tilelink"><i class="icon-user"></i><br><div class="tile5">Mój plan lekcji</div></a>
                 <div class="clear_both"></div>
             </div>
-        <script src="https://cdn.smartmath.pl/lbs/home/scripts/clock.js"></script>
+        <script src="https://<?= $domain_cdn ?>/libs/home/scripts/clock.js"></script>
         </div>
     </body>
 </html>

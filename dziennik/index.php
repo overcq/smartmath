@@ -1,13 +1,12 @@
 <?php
     require_once "libs/login/scripts/0.php";
 	session_start();
-    if (isset($_SESSION['id'])) {
-        header("Location: https://$domain_1/sp1wegrow/home/");
+    if (isset($_SESSION['user_id'])) {
+        header("Location: https://$domain_dziennik/sp1wegrow/home/");
         exit();
     }
     if (!$_POST) {
 ?>
-
 <!DOCTYPE html>
 <html lang="pl-pl">
     <head>
@@ -34,46 +33,44 @@
                     <input type="password" name="password" placeholder="Hasło" autocomplete="current-password" required="required" id="id_password">
                     <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                     <input type="submit" value="Zaloguj się">
-                    <?php 
-                        if (isset($_SESSION['login_error'])) {
-                            echo $_SESSION['login_error']; 
-                        }
-                    ?>
+                        <span style="color: red; text-algin: center;">
+                            <?php
+                                if (isset($_SESSION['login_error'])) {
+                                    echo htmlentities( $_SESSION['login_error'], ENT_HTML5, 'UTF-8' );
+                                    unset($_SESSION['login_error']);
+                                }
+                            ?>
+                        </span>
                 </form>
                 <div class="reset_pass"><br>
-                    <a href="resetuj-haslo">Nie pamiętasz hasła?</a> | 
-                    <a href="pomoc">Pomoc i kontakt</a>
+                    <a href="resetuj-haslo/">Nie pamiętasz hasła?</a> | 
+                    <a href="pomoc/">Pomoc i kontakt</a>
                 </div>
             </div>
             <script src="https://<?= $domain_cdn ?>/libs/login/scripts/login.js"></script>
         </div>
     </body>
 </html>
-
 <?php
     } else {
         $connection = @new mysqli( $db_host, $db_user, $db_pass, $db_name);
         if ($connection->connect_errno) {
             die('Błąd: '.$connection->connect_errno.' Nie udało się połączyć z bazą danych.');
         }
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $stmt = $connection->prepare( 'SELECT id FROM users WHERE email=? AND pass=?' ) or die('Unable to prepare statement.');
-        $stmt->bind_param( 'ss', $email, $password );
+        $stmt = $connection->prepare( 'SELECT id FROM users WHERE email=? AND pass=?' );
+        $stmt->bind_param( 'ss', $_POST['email'], $_POST['password'] );
         if (@$stmt->execute()) {
             $result = $stmt->get_result();
-            $records = $result->num_rows;
-            if (!$records) {
+            if (!$result->num_rows) {
+                $_SESSION['login_error'] = 'Nieprawidłowy adres e-mail lub hasło.';
                 header("Location: https://$domain_dziennik/");
-?>
-                <span style="color: red; text-algin: center;">Nieprawidłowy adres e-mail lub hasło.</span>
-<?php
-            } else {
-                $row = $result->fetch_assoc();
-                $_SESSION['id'] = $row['id'];
-                $result->close();
-                header("Location: https://$domain_dziennik/home/");
+                exit();
             }
+            unset($_SESSION['login_error']);
+            $row = $result->fetch_assoc();
+            $_SESSION['user_id'] = $row['id'];
+            $result->close();
+            header("Location: https://$domain_dziennik/home/");
         }
         $connection->close();
     }

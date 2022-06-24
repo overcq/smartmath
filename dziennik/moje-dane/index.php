@@ -1,5 +1,5 @@
 <?php
-    require_once "libs/login/scripts/0.php";
+    require_once "../libs/login/scripts/0.php";
     session_start();
     if (!isset($_SESSION['user_id'])) {
         header("Location: https://$domain_dziennik/");
@@ -28,22 +28,22 @@
                 if ($connection->connect_errno) {
                     die('Błąd: '.$connection->connect_errno.' Nie udało się połączyć z bazą danych.');
                 }
-                $sql = 'SELECT * FROM users WHERE id='._SESSION['user_id'];
+                $sql = 'SELECT * FROM users WHERE id='.$_SESSION['user_id'];
                 $result = $connection->query($sql);
                 $row = $result->fetch_assoc();
-                $name = $_SESSION['imie'];
-                $surname = $_SESSION['nazwisko'];
-                $email = $_SESSION['email']
-                $tel = $_SESSION['tel']
+                $name = $row[ 'name' ];
+                $surname = $row[ 'surname' ];
+                $email = $row[ 'email' ];
+                $tel = $row[ 'tel' ];
                 $result->close();
                 $connection->close();
             ?>
-            <p>Witaj <?= $name ?></p>
+            <p>Witaj <?= htmlentities( $name, ENT_HTML5, 'UTF-8' ) ?></p>
             <table>
                 <tbody>
-                    <tr><th>Imię i nazwisko:</th><td><?= $name ?> <?= $surname ?></td></tr>
-                    <tr><th>Adres e-mail:</th><td><?= $email ?></td></tr>
-                    <tr><th>Numer telefonu:</th><td>+48 <?= $tel ?></td></tr>
+                    <tr><th>Imię i nazwisko:</th><td><?= htmlentities( $name, ENT_HTML5, 'UTF-8' ) ?> <?= $surname ?></td></tr>
+                    <tr><th>Adres e-mail:</th><td><?= htmlentities( $email, ENT_HTML5, 'UTF-8' ) ?></td></tr>
+                    <tr><th>Numer telefonu:</th><td>+48 <?= htmlentities( $tel, ENT_HTML5, 'UTF-8' ) ?></td></tr>
                 </tbody>
             </table>
         </div>

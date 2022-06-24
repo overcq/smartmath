@@ -1,7 +1,6 @@
 <?php
-    require_once "libs/login/scripts/0.php";
-    session_start();
-    if (!isset($_SESSION['user_id'])) {
+    require_once "../libs/login/scripts/0.php";
+    if (!session_start() || !isset($_SESSION['user_id'])) {
         header("Location: https://$domain_dziennik/");
         exit();
     }
@@ -19,7 +18,9 @@
         <link rel="preconnect" href="https://<?= $domain_cdn ?>">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap">
         <link rel="stylesheet" href="https://<?= $domain_cdn ?>/libs/home/styles/home.css">
+<!--
         <link rel="stylesheet" href="home.css">
+-->
         <title>Home | smartmath</title>
         <base href="https://<?= $domain_dziennik ?>">
     </head>

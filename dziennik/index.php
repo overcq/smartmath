@@ -1,8 +1,8 @@
 <?php
     require_once "libs/login/scripts/0.php";
-	session_start();
+    session_start();
     if (isset($_SESSION['user_id'])) {
-        header("Location: https://$domain_dziennik/sp1wegrow/home/");
+        header("Location: https://$domain_dziennik/home/");
         exit();
     }
     if (!$_POST) {
@@ -53,6 +53,9 @@
 </html>
 <?php
     } else {
+        if (!isset($_POST['email']) || !isset($_POST['password'])) {
+            die('Błąd: niepoprawny formularz.');
+        }
         $connection = @new mysqli( $db_host, $db_user, $db_pass, $db_name);
         if ($connection->connect_errno) {
             die('Błąd: '.$connection->connect_errno.' Nie udało się połączyć z bazą danych.');

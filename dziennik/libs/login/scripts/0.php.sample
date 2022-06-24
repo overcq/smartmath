@@ -1,0 +1,8 @@
+<?php
+    $domain = "";
+    $domain_dziennik = "dziennik.${domain}";
+    $domain_cdn = "cdn.${domain}";
+    $db_user = "";
+    $db_pass = "";
+    $db_name = "";
+    $db_host = "";

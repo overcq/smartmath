@@ -27,7 +27,7 @@
             <div class="login_form">
                 <h2>Aby zresetować hasło, wpisz adres e-mail powiązany z kontem.</h2>
                 <br>
-                <form action="wyslano/" method="post">
+                <form action="resetuj-haslo-wyslano/" method="post">
                     <input type="email" name="email" placeholder="Adres e-mail" autocomplete="email" required="required">
                     <input type="submit" value="Resetuj hasło">
                 </form>
